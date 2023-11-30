@@ -1,1 +1,0 @@
-url_search = 'https://garfield.by/local/ajax/getMultisearch_new.php'
