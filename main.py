@@ -13,10 +13,11 @@ def start(message: telebot.types.Message):
     btn1 = types.KeyboardButton('Все игры')
     btn2 = types.KeyboardButton('Иры по тэгам')
     markup.row(btn1, btn2)
-    bot.send_message(message.chat.id, f'Привет, *{sp_symbols(message.from_user.first_name)}*, я знаю {len(data)} игры\n\n'
-                                      f'Нажми кнопку "ВСЕ ИГРЫ" и я покажу какие игры я знаю\n\n'
-                                      f'Или же нажми кнопку "ИГРЫ ПО ТЭГАМ" и я отсортирую игры для твоего удобства\n\n'
-                                      f'Я обучаюсь, поэтому количество игр будет расти, да и я буду меняться 😉',
+    bot.send_message(message.chat.id,
+                     f'Привет, *{sp_symbols(message.from_user.first_name)}*, я знаю {len(data)} игры\n\n'
+                     f'Нажми кнопку "ВСЕ ИГРЫ" и я покажу какие игры я знаю\n\n'
+                     f'Или же нажми кнопку "ИГРЫ ПО ТЭГАМ" и я отсортирую игры для твоего удобства\n\n'
+                     f'Я обучаюсь, поэтому количество игр будет расти, да и я буду меняться 😉',
                      parse_mode='MarkdownV2',
                      reply_markup=markup)
 
@@ -47,10 +48,13 @@ def callback_message(callback):
             for game in games[n_max::]:
                 markup.add(types.InlineKeyboardButton(game, callback_data=game))
             if num_game - n_max > 100:
-                bot.send_message(callback.message.chat.id, f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + 100}', parse_mode='html',
-                         reply_markup=markup)
+                bot.send_message(callback.message.chat.id,
+                                 f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + 100}', parse_mode='html',
+                                 reply_markup=markup)
             else:
-                bot.send_message(callback.message.chat.id, f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + num_game % 100}', parse_mode='html',
+                bot.send_message(callback.message.chat.id,
+                                 f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + num_game % 100}',
+                                 parse_mode='html',
                                  reply_markup=markup)
             n_max += 100
             if n_max >= num_game:
@@ -75,7 +79,7 @@ def type_sort(message: telebot.types.Message):
                 markup.add(types.InlineKeyboardButton(game, callback_data=game))
             if num_game - n_max > 100:
                 bot.send_message(message.chat.id, f'{message.text} {n_max + 1} - {n_max + 100}',
-                             parse_mode='html', reply_markup=markup)
+                                 parse_mode='html', reply_markup=markup)
             else:
                 bot.send_message(message.chat.id, f'{message.text} {n_max + 1} - {n_max + num_game % 100}',
                                  parse_mode='html', reply_markup=markup)
