@@ -31,10 +31,10 @@ def start(message: telebot.types.Message):
 #     bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} я знаю вот эти игры по тэгу ...', parse_mode='html', reply_markup=markup)
 
 
-@bot.message_handler(commands=['help'])
-def help(message: telebot.types.Message):
-    text = 'Для того чтобы найти товар введите название искомого товара или его артикул'
-    bot.send_message(message.chat.id, text)
+# @bot.message_handler(commands=['help'])
+# def help(message: telebot.types.Message):
+#     text = 'Для того чтобы найти товар введите название искомого товара или его артикул'
+#     bot.send_message(message.chat.id, text)
 
 
 @bot.callback_query_handler(func=lambda callback: True)
