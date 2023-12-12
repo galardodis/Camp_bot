@@ -11,12 +11,12 @@ bot = telebot.TeleBot(TELE_TOKEN)
 def start(message: telebot.types.Message):
     markup = types.ReplyKeyboardMarkup()
     btn1 = types.KeyboardButton('Все игры')
-    btn2 = types.KeyboardButton('Иры по тэгам')
+    btn2 = types.KeyboardButton('Иры по тегам')
     markup.row(btn1, btn2)
     bot.send_message(message.chat.id,
                      f'Привет, *{sp_symbols(message.from_user.first_name)}*, я знаю {len(data)} игры\n\n'
                      f'Нажми кнопку "ВСЕ ИГРЫ" и я покажу какие игры я знаю\n\n'
-                     f'Или же нажми кнопку "ИГРЫ ПО ТЭГАМ" и я отсортирую игры для твоего удобства\n\n'
+                     f'Или же нажми кнопку "ИГРЫ ПО ТЕГАМ" и я отсортирую игры для твоего удобства\n\n'
                      f'Я обучаюсь, поэтому количество игр будет расти, да и я буду меняться 😉',
                      parse_mode='MarkdownV2',
                      reply_markup=markup)
@@ -34,11 +34,11 @@ def callback_message(callback):
                 markup.add(types.InlineKeyboardButton(game, callback_data=game))
             if num_game - n_max > 100:
                 bot.send_message(callback.message.chat.id,
-                                 f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + 100}', parse_mode='html',
+                                 f'Игры по тегу "{callback.data}" {n_max + 1} - {n_max + 100}', parse_mode='html',
                                  reply_markup=markup)
             else:
                 bot.send_message(callback.message.chat.id,
-                                 f'Игры по тэгу "{callback.data}" {n_max + 1} - {n_max + num_game % 100}',
+                                 f'Игры по тегу "{callback.data}" {n_max + 1} - {n_max + num_game % 100}',
                                  parse_mode='html',
                                  reply_markup=markup)
             n_max += 100
@@ -73,11 +73,11 @@ def type_sort(message: telebot.types.Message):
                 break
 
 
-    elif message.text == 'Иры по тэгам':
+    elif message.text == 'Иры по тегам':
         markup = types.InlineKeyboardMarkup()
         for tag in tags:
             markup.add(types.InlineKeyboardButton(tag, callback_data=tag))
-        bot.send_message(message.chat.id, f'Я знаю вот эти тэги:',
+        bot.send_message(message.chat.id, f'Я знаю вот эти теги:',
                          parse_mode='html', reply_markup=markup)
     else:
         bot.send_message(message.chat.id, f'Я не знаю как на это реагировать, но я все еще учусь')
