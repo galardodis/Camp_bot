@@ -22,21 +22,6 @@ def start(message: telebot.types.Message):
                      reply_markup=markup)
 
 
-# @bot.message_handler(commands=['start'])
-# def start(message: telebot.types.Message):
-#     markup = types.InlineKeyboardMarkup()
-#     games = app_filter('A-z', 'Игры в помещении')
-#     for game in games:
-#         markup.add(types.InlineKeyboardButton(game, callback_data=game))
-#     bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} я знаю вот эти игры по тэгу ...', parse_mode='html', reply_markup=markup)
-
-
-# @bot.message_handler(commands=['help'])
-# def help(message: telebot.types.Message):
-#     text = 'Для того чтобы найти товар введите название искомого товара или его артикул'
-#     bot.send_message(message.chat.id, text)
-
-
 @bot.callback_query_handler(func=lambda callback: True)
 def callback_message(callback):
     if callback.data in tags:
