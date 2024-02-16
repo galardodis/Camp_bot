@@ -9,7 +9,7 @@ bot = telebot.TeleBot(TELE_TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message: telebot.types.Message):
-    markup = types.ReplyKeyboardMarkup()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton('Все игры')
     btn2 = types.KeyboardButton('Иры по тегам')
     markup.row(btn1, btn2)
@@ -83,4 +83,5 @@ def type_sort(message: telebot.types.Message):
         bot.send_message(message.chat.id, f'Я не знаю как на это реагировать, но я все еще учусь')
 
 
-bot.polling()
+if __name__ == '__main__':
+    bot.polling()
