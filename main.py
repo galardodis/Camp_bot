@@ -84,4 +84,8 @@ def type_sort(message: telebot.types.Message):
 
 
 if __name__ == '__main__':
-    bot.polling()
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        except:
+            time.sleep(1)
